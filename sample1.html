@@ -1,0 +1,32 @@
+<html>
+
+  <head>
+    <script src='js/jquery.min.js'></script>
+    <script src='js/d3.v3.min.js'></script>
+    <script src='data/sample1.js'></script>
+    <script>
+$(document).ready(function() {
+  console.log(data);
+  draw(data);
+});
+function draw(data) {
+  "use strict";
+
+  d3.select("body").append("ul").selectAll("li").data(data).enter().append("li").text(function(d) {
+    return d.name + " : " + d.status;
+  });
+
+  d3.selectAll('li').style('color', function(d){
+    if (d.status == 'Good service') {
+      return "green";
+    } else {
+      return "red";
+    }
+  });
+};
+    </script>
+  </head>
+
+  <body></body>
+
+</html>

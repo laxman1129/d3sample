@@ -1,0 +1,85 @@
+<html>
+
+<head>
+  <style>
+    div.bar {
+      background-color: darkred;
+      color: white;
+      height: 1.5em;
+      padding-right: 10px;
+      margin-top: 2px;
+      margin-bottom: 5px;
+      margin-left: 20em;
+      text-align: right;
+    }
+
+    div.label {
+      height: 1.5em;
+      line-height: 1.5em;
+      padding-right: 1em;
+      margin-bottom: 5px;
+      float: left;
+      width: 20em;
+      text-align: right;
+    }
+  </style>
+
+  <script src='js/jquery.min.js'></script>
+  <script src='js/d3.v3.min.js'></script>
+  <script src='data/sample2.js'></script>
+  <script>
+    $(document).ready(function() {
+      console.log(data);
+      draw(data);
+    });
+
+    function draw(data) {
+      "use strict";
+      //  d3.select('body').append('div')
+      //           .attr('class','chart')
+      //   .selectAll('.bar')
+      //     .data(data)
+      //     .enter()
+      //     .append("div")
+      //           .attr('class','bar')
+      //           .style('width', function (d) {
+      //                 return d.count/10 +"px";
+      //           })
+      //           .style('outline','1px solid black')
+      //           .text(function (d) {
+      //           return d.name +' : ' +d.count;
+      //           });
+
+      d3.select("body").append("div")
+        .attr("class", 'chart')
+        .selectAll('div.line')
+        .data(data).enter()
+        .append("div")
+        .attr("class", 'line');
+
+
+      d3.selectAll('div.line')
+        .append('div')
+        .attr('class', 'label')
+        .text(function(d) {
+          return d.name;
+        });
+
+      d3.selectAll('div.line')
+        .append('div')
+        .attr('class', 'bar')
+        .style('width', function(d) {
+          return d.count / 10 + "px";
+        })
+        .text(function(d) {
+          return d.count
+        });
+
+
+    };
+  </script>
+</head>
+
+<body></body>
+
+</html>

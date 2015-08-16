@@ -1,0 +1,77 @@
+<html>
+
+<head>
+  <style>
+    .inner {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+  <script src='js/jquery.min.js'></script>
+  <script src='js/d3.v3.min.js'></script>
+  <script src='data/rect1.js'></script>
+  <script>
+    $(document).ready(function() {
+      console.log(data);
+      draw(data);
+    });
+
+    function draw(data) {
+      "use strict";
+      var height = 500;
+      var width = 500;
+      var margin = 50;
+      d3.select('body')
+        .append('div')
+        .attr('class', 'outer')
+        .attr('height', height)
+        .attr('width', width)
+        .attr('overflow', 'auto')
+        .append('div')
+        .attr('height', height)
+        .attr('width', width)
+        .attr('class', 'inner')
+        .append('div')
+        .attr('id', 'chartPane');
+
+      d3.select('#chartPane')
+        .append('svg')
+        .attr('class', 'inner')
+        .attr('width', width)
+        .attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + margin + ',0)')
+        .attr('id', 'chart');
+
+
+      var xScale = d3.time.scale()
+        .range([margin, width])
+        .domain([new Date(2015, 7, 1), new Date(2015, 7, 24)]);
+      var yScale = d3.scale.ordinal()
+        .domain(names)
+        .rangeRoundBands([0, height - margin], .1);
+
+      var x_axis = d3.svg.axis().scale(xScale);
+      var y_axis = d3.svg.axis().scale(yScale).orient('left');
+
+      d3.select('svg')
+        .append('g')
+        .attr("transform", "rotate(0)")
+        .attr('class', 'x axis')
+        //.attr('transform', 'translate(0,' + height - margin + ')')
+        .call(x_axis);
+
+      d3.select('svg')
+        .append('g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate(' + margin + ',0)')
+        .call(y_axis);
+
+    };
+  </script>
+</head>
+
+<body></body>
+
+</html>
